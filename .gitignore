@@ -1,0 +1,15 @@
+**/crash.log
+**/terraform.tf
+**/provider.tf
+**/.terragrunt-cache
+**/.terraform
+**/terraform.tfstate*
+*.terraform
+.terraform.lock.hcl
+#IDE metadata
+**.idea/**
+.vscode
+.DS_STORE
+
+report
+states
