@@ -3,9 +3,8 @@ locals {
     extra_yamls = var.extra_yamls
   }))
 
-  files = fileset("extra-yamls", "**/*.yaml")
-  content_md5 = { for fn in local.files : fn => filemd5("extra-yamls/${fn}") }
-  content_md5_joined = md5(join("", values(local.content_md5)))
+  extra_yamls = { for yaml in var.extra_yamls : yaml => md5(yaml) }
+  extra_yamls_md5 = md5(join("", values(local.extra_yamls)))
 }
 
 resource "helm_release" "release" {
@@ -23,12 +22,12 @@ resource "helm_release" "release" {
 
   set {
     name  = "extra-yamls-content-md5"
-    value = var.generate_kustomize ? local.kustomize_template_md5 : local.content_md5_joined
+    value = var.generate_kustomize ? local.kustomize_template_md5 : local.extra_yamls_md5
   }
 
   depends_on = [
     local_file.kustomization_file,
-    null_resource.yaml
+    local_file.yaml
   ]
 }
 
@@ -41,15 +40,13 @@ resource "local_file" "kustomization_file" {
   })
 
   depends_on = [
-    null_resource.yaml
+    local_file.yaml
   ]
 }
 
-resource "null_resource" "yaml" {
-  for_each = fileset("extra-yamls", "**/*.yaml")
-  
-  triggers = {
-    content     = file("extra-yamls/${each.value}")
-    content_md5 = filemd5("extra-yamls/${each.value}")
-  }
+resource "local_file" "yaml" {
+  count = length(var.extra_yamls)
+
+  filename = "extra-yamls/${md5(var.extra_yamls[count.index])}.yaml"
+  content  = var.extra_yamls[count.index]
 }

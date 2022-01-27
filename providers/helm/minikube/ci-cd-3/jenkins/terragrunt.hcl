@@ -22,7 +22,9 @@ inputs = {
   timeout = 600
 
   extra_yamls = [
-    "configmaps/jenkins-docker-ci-configs.yaml"
+    "${templatefile("extra-yamls/configmaps/jenkins-docker-ci-configs.yaml", {
+      namespace = local.common.inputs.namespace_name
+    })}",
   ]
 }
 

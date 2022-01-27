@@ -36,12 +36,6 @@ variable "values" {
 variable "extra_yamls" {
   type        = list(string)
   default     = []
-  validation {
-    condition = alltrue([
-      for yaml in var.extra_yamls : fileexists("extra-yamls/${yaml}")
-    ])
-    error_message = "All files listed in the extra_yamls must exists on the 'extra-yamls' folder."
-  }
 }
 
 variable "generate_kustomize" {
