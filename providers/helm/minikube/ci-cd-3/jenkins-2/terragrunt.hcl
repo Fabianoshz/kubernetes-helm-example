@@ -21,9 +21,7 @@ inputs = {
 
   timeout = 600
 
-  extra_yamls = [
-    "configmaps/jenkins-docker-ci-configs.yaml"
-  ]
+  generate_kustomize = false
 }
 
 include "provider" {

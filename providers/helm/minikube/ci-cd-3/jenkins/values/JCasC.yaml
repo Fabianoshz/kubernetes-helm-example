@@ -1,0 +1,8 @@
+controller:
+  JCasC:
+    enabled: true
+    defaultConfig: true
+    configScripts:
+     welcome-message: |
+       jenkins:
+         systemMessage: "Bem vindo ao nosso jenkins. Ele é mantido como código!"

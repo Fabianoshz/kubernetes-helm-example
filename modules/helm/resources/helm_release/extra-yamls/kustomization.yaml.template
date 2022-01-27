@@ -1,0 +1,5 @@
+resources:
+  - base.yaml
+  %{ for yaml in extra_yamls ~}
+- ${yaml} # Content md5: ${filemd5("extra-yamls/${yaml}")}
+  %{ endfor ~}

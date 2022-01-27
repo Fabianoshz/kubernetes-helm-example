@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jenkins-docker-ci-configs
+  namespace: ci-cd-3
+data:
+  data.txt: |
+    Helm managed template
