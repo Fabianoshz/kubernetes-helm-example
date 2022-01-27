@@ -1,3 +1,0 @@
-resources:
-  - base.yaml
-  - configmaps/jenkins-2-docker-ci-configs.yaml

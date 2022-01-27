@@ -19,13 +19,14 @@ inputs = {
     "${file("values/values.yaml")}"
   ]
 
-  timeout = 600
-
   extra_yamls = [
-    "${templatefile("extra-yamls/configmaps/jenkins-docker-ci-configs.yaml", {
+    "${templatefile("extra-yamls/configmaps/config.yaml", {
+      name = "${basename(get_terragrunt_dir())}-config"
       namespace = local.common.inputs.namespace_name
     })}",
   ]
+
+  timeout = 600
 }
 
 include "provider" {
