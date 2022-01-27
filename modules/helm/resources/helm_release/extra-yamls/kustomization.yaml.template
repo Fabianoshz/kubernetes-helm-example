@@ -1,5 +1,5 @@
 resources:
   - base.yaml
   %{ for yaml in extra_yamls ~}
-- extra-yamls/${md5(yaml)}.yaml
+- ${md5(yaml)}.yaml
   %{ endfor ~}
