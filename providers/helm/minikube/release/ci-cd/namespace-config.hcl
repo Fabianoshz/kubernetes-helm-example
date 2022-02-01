@@ -1,5 +1,5 @@
 dependency "namespace" {
-  config_path = "../../../kubernetes/minikube/namespaces/ci-cd"
+  config_path = "../../../../kubernetes/minikube/namespaces/ci-cd"
 }
 
 inputs = {

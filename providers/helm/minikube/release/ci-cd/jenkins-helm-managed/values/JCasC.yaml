@@ -5,4 +5,4 @@ controller:
     configScripts:
      welcome-message: |
        jenkins:
-         systemMessage: "Bem vindo ao nosso jenkins. Ele é mantido como código!"
+         systemMessage: "Welcome to our Jenkins!"

@@ -1,0 +1,3 @@
+controller:
+  additionalPlugins:
+    - blueocean:1.24.7
