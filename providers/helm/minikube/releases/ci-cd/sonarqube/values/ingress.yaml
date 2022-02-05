@@ -1,0 +1,11 @@
+ingress:
+  enabled: true
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt"
+  hosts:
+  - name: sonarqube.local.gambiarra.net
+    path: /
+  tls:
+  - hosts:
+    - sonarqube.local.gambiarra.net
+    secretName: sonarqube-tls

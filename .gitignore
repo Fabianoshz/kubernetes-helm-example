@@ -5,11 +5,16 @@
 **/.terraform
 **/terraform.tfstate*
 *.terraform
-.terraform.lock.hcl
+
 #IDE metadata
 **.idea/**
 .vscode
 .DS_STORE
 
+.env
+
 report
-states
+terraform/states
+terraform/plugins_cache
+terraform/terragrunt_cache
+terraform/secrets

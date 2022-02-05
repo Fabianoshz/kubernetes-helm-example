@@ -1,0 +1,22 @@
+controller:
+  JCasC:
+    enabled: true
+    defaultConfig: true
+    configScripts:
+      welcome-message: |
+        jenkins:
+          systemMessage: "Bem vindo ao nosso jenkins. Ele é mantido como código!"
+      security-realm: |
+        jenkins:
+          securityRealm: keycloak
+        unclassified:
+          keycloakSecurityRealm:
+            keycloakJson: |-
+              {
+                "realm": "${keycloak_realm}",
+                "auth-server-url": "${keycloak_auth_url}",
+                "ssl-required": "external",
+                "resource": "jenkins",
+                "public-client": true,
+                "confidential-port": 0
+              }

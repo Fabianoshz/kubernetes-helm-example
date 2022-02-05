@@ -1,0 +1,17 @@
+extraInitContainers:
+  - name: install-branch-plugin
+    image: curlimages/curl:7.76.1
+    command:
+      - curl
+    args:
+      - '-fsSL'
+      - '--output'
+      - '/tmp/sonarqube-community-branch-plugin-1.8.1.jar'
+      - 'https://github.com/mc1arke/sonarqube-community-branch-plugin/releases/download/1.8.1/sonarqube-community-branch-plugin-1.8.1.jar'
+    volumeMounts:
+      - name: tmp-dir
+        mountPath: /tmp
+    imagePullPolicy: IfNotPresent
+    securityContext:
+      runAsUser: 1000
+      runAsGroup: 1000

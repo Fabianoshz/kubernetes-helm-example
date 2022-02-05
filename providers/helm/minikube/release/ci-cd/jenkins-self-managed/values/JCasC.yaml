@@ -1,8 +1,0 @@
-controller:
-  JCasC:
-    enabled: true
-    defaultConfig: true
-    configScripts:
-     welcome-message: |
-       jenkins:
-         systemMessage: "Welcome to our Jenkins!"

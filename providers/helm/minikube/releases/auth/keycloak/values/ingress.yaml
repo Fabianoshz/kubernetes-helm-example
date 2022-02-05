@@ -1,0 +1,10 @@
+ingress:
+  enabled: true
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt"
+  hostname: keycloak.local.gambiarra.net
+  path: /
+  tls:
+  - hosts:
+    - keycloak.local.gambiarra.net
+    secretName: keycloak-tls

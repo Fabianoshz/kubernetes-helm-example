@@ -1,0 +1,59 @@
+replicaCount: 1
+existingSecret: "openldap-admin-creds"
+
+env:
+  LDAP_DOMAIN: gambiarra.net
+  LDAP_ORGANISATION: Gambiarra Net
+  LDAP_REMOVE_CONFIG_AFTER_SETUP: "true"
+
+ltb-passwd:
+  enabled: true
+  existingSecret: "openldap-admin-creds"
+
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: "letsencrypt"
+    hostname: openldap-ltb-password.local.gambiarra.net
+    path: /
+    hosts:
+      - openldap-ltb-password.local.gambiarra.net
+    tls:
+      - hosts:
+          - openldap-ltb-password.local.gambiarra.net
+        secretName: openldap-ltb-password-tls
+
+  ldap:
+    bindDN: cn=admin,dc=gambiarra,dc=net
+    bindPWKey: LDAP_ADMIN_PASSWORD
+    searchBase: dc=gambiarra,dc=net
+    server: ldap://openldap-openldap-stack-ha
+
+phpldapadmin:
+  enabled: true
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: "letsencrypt"
+    hostname: openldap-phpadmin.local.gambiarra.net
+    path: /
+    hosts:
+      - openldap-phpadmin.local.gambiarra.net
+    tls:
+      - hosts:
+          - openldap-phpadmin.local.gambiarra.net
+        secretName: openldap-phpadmin-tls
+
+customTLS:
+  CA:
+    enabled: false
+  enabled: false
+  secret: ""
+
+service:
+  annotations: {}
+  externalIPs: []
+  ldapPort: 389
+  sessionAffinity: None
+  sslLdapPort: 636
+  type: ClusterIP

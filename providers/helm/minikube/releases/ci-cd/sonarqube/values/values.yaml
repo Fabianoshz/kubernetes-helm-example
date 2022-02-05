@@ -1,0 +1,2 @@
+jvmOpts: "-javaagent:/tmp/sonarqube-community-branch-plugin-1.8.1.jar=web"
+jvmCeOpts: "-javaagent:/tmp/sonarqube-community-branch-plugin-1.8.1.jar=ce"

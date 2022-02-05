@@ -2,6 +2,13 @@
 
 This is an example to show how to use multiple Terraform providers using Terragrunt while also keeping a clean and concise folder structure without losing the flexibility of terraform and terragrunt.
 
+## Objectives
+
+- Create two Jenkins release based on the chart from https://charts.jenkins.io
+    - The first one using an auto generated kustomize that will add extra resources on the original template.
+    - The second one using a custom kustomize file that will also add extra resources on the original template.
+- Validate that the resources are valid and sucessfully deployed
+
 ## Requirements
 
 - Minikube
@@ -17,6 +24,18 @@ Start your minikube
 
 ```
 minikube start
+```
+
+Generate local vault envs
+
+```
+
+```
+
+Export environment variables for terragrunt
+
+```
+
 ```
 
 Create the namespace on the cluster:
@@ -42,6 +61,18 @@ Start your minikube
 minikube start
 ```
 
+Generate local vault envs
+
+```
+
+```
+
+Export environment variables for terragrunt
+
+```
+
+```
+
 Create the Jenkins instances (Terragrunt will create the namespace as a dependency for you):
 
 ```
@@ -53,6 +84,7 @@ terragrunt run-all apply --terragrunt-non-interactive --auto-approve
 
 Checking if the resources are running:
 ```
+kubectl get deployment  --namespace ci-cd 
 ```
 
 Checking the set resource values:

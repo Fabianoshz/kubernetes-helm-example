@@ -1,0 +1,4 @@
+postgresql:
+  existingSecret: keycloak-passwords
+  persistence:
+    enabled: false

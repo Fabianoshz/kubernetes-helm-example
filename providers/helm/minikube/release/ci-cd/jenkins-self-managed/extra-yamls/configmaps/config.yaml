@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: jenkins-self-managed-config
-  namespace: ci-cd
-data:
-  data.txt: |
-    Self managed template, no terraform/terragrunt functions here.

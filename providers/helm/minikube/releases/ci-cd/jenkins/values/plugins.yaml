@@ -1,0 +1,10 @@
+controller:
+  installPlugins:
+    - kubernetes:1.31.3
+    - workflow-aggregator:2.6
+    - git:4.10.3
+    - configuration-as-code:1.55.1
+  additionalPlugins:
+    - blueocean:1.25.2
+    - keycloak:2.3.0
+    - command-launcher:1.6

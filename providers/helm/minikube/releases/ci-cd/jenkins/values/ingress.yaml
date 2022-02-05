@@ -1,0 +1,10 @@
+controller:
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: "letsencrypt"
+    hostName: jenkins.local.gambiarra.net
+    tls:
+    - hosts:
+      - jenkins.local.gambiarra.net
+      secretName: jenkins-tls

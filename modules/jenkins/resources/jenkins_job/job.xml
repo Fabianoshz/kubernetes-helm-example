@@ -1,0 +1,79 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject plugin="workflow-multibranch@2.26">
+  <actions/>
+  <description/>
+  <displayName>${display_name}</displayName>
+  <properties>
+    <org.csanchez.jenkins.plugins.kubernetes.KubernetesFolderProperty plugin="kubernetes@1.30.1">
+      <permittedClouds/>
+    </org.csanchez.jenkins.plugins.kubernetes.KubernetesFolderProperty>
+  </properties>
+  <folderViews class="jenkins.branch.MultiBranchProjectViewHolder" plugin="branch-api@2.7.0">
+    <owner class="org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject" reference="../.."/>
+  </folderViews>
+  <healthMetrics/>
+  <icon class="jenkins.branch.MetadataActionFolderIcon" plugin="branch-api@2.7.0">
+    <owner class="org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject" reference="../.."/>
+  </icon>
+  <orphanedItemStrategy class="com.cloudbees.hudson.plugins.folder.computed.DefaultOrphanedItemStrategy" plugin="cloudbees-folder@6.16">
+    <pruneDeadBranches>true</pruneDeadBranches>
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>-1</numToKeep>
+  </orphanedItemStrategy>
+  <triggers/>
+  <disabled>false</disabled>
+  <sources class="jenkins.branch.MultiBranchProject$BranchSourceList" plugin="branch-api@2.7.0">
+    <data>
+      <jenkins.branch.BranchSource>
+        <source class="org.jenkinsci.plugins.github_branch_source.GitHubSCMSource" plugin="github-branch-source@2.11.2">
+          <id/>
+          <apiUri>https://api.github.com</apiUri>
+          <credentialsId>${github_credentials_id}</credentialsId>
+          <repoOwner>${repo_owner}</repoOwner>
+          <repository>${repository}</repository>
+          <repositoryUrl>${repository_url}</repositoryUrl>
+          %{if enable_behaviours}
+          <traits>
+            <org.jenkinsci.plugins.github__branch__source.BranchDiscoveryTrait>
+              <strategyId>1</strategyId>
+            </org.jenkinsci.plugins.github__branch__source.BranchDiscoveryTrait>
+            <org.jenkinsci.plugins.github__branch__source.OriginPullRequestDiscoveryTrait>
+              <strategyId>1</strategyId>
+            </org.jenkinsci.plugins.github__branch__source.OriginPullRequestDiscoveryTrait>
+            <org.jenkinsci.plugins.github__branch__source.ForkPullRequestDiscoveryTrait>
+              <strategyId>1</strategyId>
+              <trust class="org.jenkinsci.plugins.github_branch_source.ForkPullRequestDiscoveryTrait$TrustPermission"/>
+            </org.jenkinsci.plugins.github__branch__source.ForkPullRequestDiscoveryTrait>
+            <io.jenkins.plugins.checks.github.status.GitHubSCMSourceStatusChecksTrait plugin="github-checks@1.0.13">
+              <skip>false</skip>
+              <skipNotifications>true</skipNotifications>
+              <unstableBuildNeutral>false</unstableBuildNeutral>
+              <name>Kubernetes Deploy</name>
+              <suppressLogs>false</suppressLogs>
+              <skipProgressUpdates>false</skipProgressUpdates>
+            </io.jenkins.plugins.checks.github.status.GitHubSCMSourceStatusChecksTrait>
+          </traits>
+          %{else}
+          <traits/>
+          %{endif}
+        </source>
+        <strategy class="jenkins.branch.DefaultBranchPropertyStrategy">
+          %{if suppress_automatic_scm_triggering}
+          <properties class="java.util.Arrays$ArrayList">
+            <a class="jenkins.branch.BranchProperty-array">
+              <jenkins.branch.NoTriggerBranchProperty/>
+            </a>
+          </properties>
+          %{else}
+          <properties class="empty-list"/>
+          %{endif}
+        </strategy>
+      </jenkins.branch.BranchSource>
+    </data>
+    <owner class="org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject" reference="../.."/>
+  </sources>
+  <factory class="org.jenkinsci.plugins.workflow.multibranch.WorkflowBranchProjectFactory">
+    <owner class="org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject" reference="../.."/>
+    <scriptPath>${jenkinsfile_path}</scriptPath>
+  </factory>
+</org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject>
