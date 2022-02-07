@@ -1,3 +1,7 @@
+dependency "namespace" {
+  config_path = "${path_relative_from_include("global")}/providers/kubernetes/minikube/namespaces/${local.common.inputs.namespace_name}"
+}
+
 terraform {
   source = "${path_relative_from_include("global")}/modules/helm/resources/helm_release"
 }
@@ -9,7 +13,7 @@ locals {
 
 inputs = {
   name          = local.name
-  namespace     = local.common.inputs.namespace_name
+  namespace     = dependency.namespace.outputs.name
   repository    = "https://SonarSource.github.io/helm-chart-sonarqube"
   chart         = "sonarqube"
   chart_version = "2.0.0+233"

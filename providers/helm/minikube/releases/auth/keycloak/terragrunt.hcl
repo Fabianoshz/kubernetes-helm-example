@@ -1,3 +1,7 @@
+dependency "namespace" {
+  config_path = "${path_relative_from_include("global")}/providers/kubernetes/minikube/namespaces/${local.common.inputs.namespace_name}"
+}
+
 dependency "admin-password" {
   config_path = "${path_relative_from_include("global")}/providers/local/vault/secrets/helm_minikube_releases_auth_keycloak_admin-password"
 }
@@ -25,7 +29,7 @@ locals {
 
 inputs = {
   name          = local.name
-  namespace     = local.common.inputs.namespace_name
+  namespace     = dependency.namespace.outputs.name
   repository    = "https://charts.bitnami.com/bitnami"
   chart         = "keycloak"
   chart_version = "6.1.1"

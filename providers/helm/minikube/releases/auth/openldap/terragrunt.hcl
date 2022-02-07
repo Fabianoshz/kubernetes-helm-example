@@ -1,3 +1,7 @@
+dependency "namespace" {
+  config_path = "${path_relative_from_include("global")}/providers/kubernetes/minikube/namespaces/${local.common.inputs.namespace_name}"
+}
+
 dependency "ldap-admin-password" {
   config_path = "${path_relative_from_include("global")}/providers/local/vault/secrets/helm_minikube_releases_auth_openldap_ldap-admin-password"
 }
@@ -17,7 +21,7 @@ locals {
 
 inputs = {
   name          = local.name
-  namespace     = local.common.inputs.namespace_name
+  namespace     = dependency.namespace.outputs.name
   repository    = "https://jp-gouin.github.io/helm-openldap"
   chart         = "openldap-stack-ha"
   chart_version = "2.1.6"

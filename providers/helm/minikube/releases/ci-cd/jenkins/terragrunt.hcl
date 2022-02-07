@@ -1,3 +1,7 @@
+dependency "namespace" {
+  config_path = "${path_relative_from_include("global")}/providers/kubernetes/minikube/namespaces/${local.common.inputs.namespace_name}"
+}
+
 dependency "keycloak" {
   config_path = "${path_relative_from_include("global")}/providers/helm/minikube/releases/auth/keycloak"
 }
@@ -20,7 +24,7 @@ locals {
 
 inputs = {
   name          = local.name
-  namespace     = local.common.inputs.namespace_name
+  namespace     = dependency.namespace.outputs.name
   repository    = "https://charts.jenkins.io"
   chart         = "jenkins"
   chart_version = "3.11.3"
